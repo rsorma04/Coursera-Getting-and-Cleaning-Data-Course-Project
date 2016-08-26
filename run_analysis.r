@@ -44,6 +44,9 @@ activity_test_main <- read.table("UCI HAR Dataset/test/y_test.txt")
 test_set <- cbind(subjects_test, activity_test_main, test_data)
 ######## Prepare Training Data #######  
 
+
+#######Prepare Training Data ############
+
 # Load Main Training Data  
 train_data <- read.table("UCI HAR Dataset/train/X_train.txt")
 
@@ -74,4 +77,6 @@ untidy_overall_dataset <- untidy_overall_dataset[, grep(paste(col_needed, collap
 # Turn activities and subjects into factors.
 final_data_melted <- melt(untidy_overall_dataset, id = c("subject", "activity"))
 final_data_avg <- dcast(final_data_melted, subject + activity ~ variable, mean)
+
+############## Write Average Data to File ####################
 write.table(final_data_avg, "tidy.txt", row.names = FALSE, quote = FALSE)
